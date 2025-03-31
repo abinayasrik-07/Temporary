@@ -161,3 +161,105 @@ document.addEventListener('DOMContentLoaded', function() {
         if (value > 0) childrenInput.value = value - 1;
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('.recommendations-carousel');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const dotsContainer = document.querySelector('.carousel-dots');
+    const cards = document.querySelectorAll('.hotel-card');
+    
+    let currentIndex = 0;
+    const cardWidth = cards[0].offsetWidth + 32; // card width + gap
+    
+    // Create dots
+    cards.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('carousel-dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+            goToSlide(index);
+        });
+        dotsContainer.appendChild(dot);
+    });
+    
+    const dots = document.querySelectorAll('.carousel-dot');
+    
+    // Update dots
+    function updateDots() {
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+    }
+    
+    // Go to specific slide
+    function goToSlide(index) {
+        currentIndex = index;
+        carousel.scrollTo({
+            left: index * cardWidth,
+            behavior: 'smooth'
+        });
+        updateDots();
+    }
+    
+    // Next slide
+    nextBtn.addEventListener('click', () => {
+        if (currentIndex < cards.length - 1) {
+            currentIndex++;
+            goToSlide(currentIndex);
+        }
+    });
+    
+    // Previous slide
+    prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            goToSlide(currentIndex);
+        }
+    });
+    
+    // Handle swipe on touch devices
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    carousel.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+    
+    carousel.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, {passive: true});
+    
+    function handleSwipe() {
+        if (touchEndX < touchStartX && currentIndex < cards.length - 1) {
+            currentIndex++;
+            goToSlide(currentIndex);
+        }
+        if (touchEndX > touchStartX && currentIndex > 0) {
+            currentIndex--;
+            goToSlide(currentIndex);
+        }
+    }
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        cardWidth = cards[0].offsetWidth + 32;
+        goToSlide(currentIndex);
+    });
+});
+
+document.getElementById('searchForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const params = new URLSearchParams({
+        destination: document.getElementById('destination').value,
+        checkin: document.getElementById('checkin').value,
+        checkout: document.getElementById('checkout').value,
+        rooms: document.getElementById('rooms').value,
+        adults: document.getElementById('adults').value,
+        children: document.getElementById('children').value || 0
+    });
+    
+    window.location.href = `hotel-listings.html?${params.toString()}`;
+});
