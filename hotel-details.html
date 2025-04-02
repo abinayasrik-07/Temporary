@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Details | Cozy Haven Stay</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Hotel Details Page Specific Styles */
+        .hotel-details-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        /* Image Carousel */
+        .carousel-container {
+            position: relative;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            height: 400px;
+        }
+        
+        .carousel img {
+            flex: 0 0 100%;
+            width: 100%;
+            object-fit: cover;
+            scroll-snap-align: start;
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            bottom: 1rem;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+        }
+        
+        .carousel-dot.active {
+            background-color: white;
+        }
+        
+        /* Hotel Info Section */
+        .hotel-info-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .hotel-header {
+            margin-bottom: 1.5rem;
+        }
+        
+        .hotel-name {
+            font-size: 2rem;
+            color: #003580;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hotel-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .hotel-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .star-rating {
+            color: #ffb700;
+            font-size: 1.2rem;
+        }
+        
+        .reviews {
+            color: #666;
+        }
+        
+        /* Amenities Section */
+        .amenities-section {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: #003580;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f7ff;
+        }
+        
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .amenity-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background-color: #f8fafc;
+            border-radius: 6px;
+        }
+        
+        /* Rooms Section */
+        .rooms-section {
+            margin-bottom: 2rem;
+        }
+        
+        .room-card {
+            display: grid;
+            grid-template-columns: 300px 1fr auto;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .room-image {
+            width: 100%;
+            height: 180px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+        
+        .room-info h3 {
+            font-size: 1.2rem;
+            color: #003580;
+            margin-bottom: 0.5rem;
+        }
+        
+        .room-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0.8rem 0;
+        }
+        
+        .room-feature {
+            background-color: #f0f7ff;
+            color: #003580;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        
+        .room-price {
+            text-align: right;
+            min-width: 150px;
+        }
+        
+        .price-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #003580;
+        }
+        
+        .price-period {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .select-room-btn {
+            padding: 0.8rem 1.5rem;
+            background-color: #003580;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .select-room-btn:hover {
+            background-color: #002366;
+        }
+        
+        /* Reviews Section */
+        .reviews-section {
+            margin-bottom: 2rem;
+        }
+        
+        .review-card {
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+        
+        .reviewer {
+            font-weight: 600;
+            color: #003580;
+        }
+        
+        .review-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .review-rating {
+            color: #ffb700;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Booking Summary */
+        .booking-summary {
+            background-color: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .booking-title {
+            font-size: 1.2rem;
+            color: #003580;
+            margin-bottom: 1rem;
+        }
+        
+        .booking-dates {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .booking-guests {
+            margin-bottom: 1rem;
+        }
+        
+        .booking-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #003580;
+            text-align: right;
+            margin: 1.5rem 0;
+        }
+        
+        .book-now-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: #003580;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .book-now-btn:hover {
+            background-color: #002366;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .hotel-info-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .carousel {
+                height: 350px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .room-card {
+                grid-template-columns: 1fr;
+            }
+            
+            .room-image {
+                height: 200px;
+            }
+            
+            .room-price {
+                text-align: left;
+                margin-top: 1rem;
+            }
+            
+            .carousel {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .carousel {
+                height: 250px;
+            }
+            
+            .hotel-name {
+                font-size: 1.5rem;
+            }
+            
+            .amenities-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Your header content from index.html -->
+    </header>
+
+    <div class="hotel-details-container">
+        <!-- Image Carousel -->
+        <div class="carousel-container">
+            <div class="carousel" id="hotelCarousel">
+                <!-- Images will be added by JavaScript -->
+            </div>
+            <div class="carousel-nav" id="carouselNav">
+                <!-- Dots will be added by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="hotel-info-section">
+            <div>
+                <!-- Hotel Info -->
+                <div class="hotel-header">
+                    <h1 class="hotel-name" id="hotelName">Hotel Name</h1>
+                    <div class="hotel-location">
+                        <svg viewBox="0 0 24 24" width="16" height="16">
+                            <path d="M12 0C7.312 0 3 4.312 3 9c0 6.25 9 15 9 15s9-8.75 9-15c0-4.688-4.312-9-9-9zm0 13.5c-2.481 0-4.5-2.019-4.5-4.5s2.019-4.5 4.5-4.5 4.5 2.019 4.5 4.5-2.019 4.5-4.5 4.5z"/>
+                        </svg>
+                        <span id="hotelLocation">Location</span>
+                    </div>
+                    <div class="hotel-rating">
+                        <span class="star-rating" id="hotelStars">★★★★★</span>
+                        <span class="reviews" id="hotelReviews">(1,284 reviews)</span>
+                    </div>
+                </div>
+                
+                <!-- Amenities Section -->
+                <div class="amenities-section">
+                    <h2 class="section-title">Amenities</h2>
+                    <div class="amenities-grid" id="amenitiesGrid">
+                        <!-- Amenities will be added by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Rooms Section -->
+                <div class="rooms-section">
+                    <h2 class="section-title">Available Rooms</h2>
+                    <div id="roomsContainer">
+                        <!-- Room cards will be added by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Reviews Section -->
+                <div class="reviews-section">
+                    <h2 class="section-title">Guest Reviews</h2>
+                    <div id="reviewsContainer">
+                        <!-- Reviews will be added by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Booking Summary -->
+            <div class="booking-summary">
+                <h3 class="booking-title">Your Booking</h3>
+                <div class="booking-dates">
+                    <span>Check-in:</span>
+                    <span id="checkinDate">Nov 15, 2023</span>
+                </div>
+                <div class="booking-dates">
+                    <span>Check-out:</span>
+                    <span id="checkoutDate">Nov 20, 2023</span>
+                </div>
+                <div class="booking-guests">
+                    <span>Guests:</span>
+                    <span id="bookingGuests">2 Adults, 1 Child</span>
+                </div>
+                <div class="booking-guests">
+                    <span>Rooms:</span>
+                    <span id="bookingRooms">1 Room</span>
+                </div>
+                <div id="selectedRoomInfo">
+                    <!-- Selected room info will be added here -->
+                </div>
+                <div class="booking-price">
+                    Total: <span id="totalPrice">₹0</span>
+                </div>
+                <button class="book-now-btn" id="bookNowBtn">Book Now</button>
+            </div>
+        </div>
+    </div>
+    <script src="hotel-details.js"></script>
+</body>
+</html>

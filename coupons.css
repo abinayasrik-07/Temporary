@@ -1,0 +1,131 @@
+/* Coupons Page Specific Styles */
+.coupons-page {
+    padding: 4rem 0;
+    background-color: #f5f7fa;
+}
+
+.coupons-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.coupons-header h1 {
+    color: #003580;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.coupons-header p {
+    color: #666;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.coupons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.coupon-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 53, 128, 0.1);
+    transition: transform 0.3s ease;
+    border: 1px solid #e2e8f0;
+    position: relative;
+}
+
+.coupon-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 53, 128, 0.15);
+}
+
+.coupon-tag {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #febb02;
+    color: #003580;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.coupon-content {
+    padding: 1.8rem;
+}
+
+.coupon-card h3 {
+    color: #003580;
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+}
+
+.coupon-description {
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.coupon-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.coupon-value {
+    background-color: #f0f7ff;
+    color: #003580;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.coupon-code {
+    font-family: 'Courier New', monospace;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.apply-coupon {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #003580;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.apply-coupon:hover {
+    background-color: #002366;
+}
+
+.terms-note {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .coupons-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+    
+    .coupons-header h1 {
+        font-size: 2rem;
+    }
+}

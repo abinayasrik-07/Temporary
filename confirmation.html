@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation | Cozy Haven Stay</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Cozy Haven <span>Stay</span></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#recommendations">Top Hotels</a></li>
+                    <li><a href="coupons.html">Coupons & Discounts</a></li>
+                    <li><a href="index.html#about">About us</a></li>
+                    <li><a href="index.html#help">Help</a></li>
+                </ul>
+            </nav>
+            
+        </div>
+    </header>
+
+    <!-- Confirmation Main Content -->
+    <main class="confirmation-container">
+        <div class="container">
+            <div class="confirmation-header">
+                <div class="confirmation-progress">
+                    <div class="progress-step completed">
+                        <span class="step-number">1</span>
+                        <span class="step-label">Your Details</span>
+                    </div>
+                    <div class="progress-step completed">
+                        <span class="step-number">2</span>
+                        <span class="step-label">Payment</span>
+                    </div>
+                    <div class="progress-step active">
+                        <span class="step-number">3</span>
+                        <span class="step-label">Confirmation</span>
+                    </div>
+                </div>
+                
+                <div class="confirmation-success">
+                    <div class="success-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48" fill="#4CAF50">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <h1>Booking Confirmed!</h1>
+                    <p>Your reservation at <span id="confirmation-hotel-name">Grand Horizon Palace</span> is confirmed.</p>
+                    <div class="confirmation-number">
+                        <span>Confirmation #: </span>
+                        <strong id="booking-reference">CHS-<span id="booking-id">5X8K2P9</span></strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="confirmation-content">
+                <div class="confirmation-details">
+                    <div class="detail-card">
+                        <h2>Booking Summary</h2>
+                        <div class="hotel-info">
+                            <img id="confirmation-hotel-image" src="https://images.unsplash.com/photo-1566073771259-6a8506099945" alt="Hotel Image" class="hotel-image">
+                            <div class="hotel-text">
+                                <h3 id="confirmation-hotel-name-full">Grand Horizon Palace</h3>
+                                <div class="hotel-location">
+                                    <svg viewBox="0 0 24 24" width="14" height="14">
+                                        <path d="M12 0C7.312 0 3 4.312 3 9c0 6.25 9 15 9 15s9-8.75 9-15c0-4.688-4.312-9-9-9zm0 13.5c-2.481 0-4.5-2.019-4.5-4.5s2.019-4.5 4.5-4.5 4.5 2.019 4.5 4.5-2.019 4.5-4.5 4.5z"/>
+                                    </svg>
+                                    <span id="confirmation-hotel-location">Central District, Delhi</span>
+                                </div>
+                                <div class="hotel-rating">
+                                    <span class="star-rating">★★★★★</span>
+                                    <span class="reviews">(1,284 reviews)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="booking-info">
+                            <div class="info-row">
+                                <span class="info-label">Check-in</span>
+                                <span class="info-value" id="confirmation-checkin">Nov 15, 2023</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Check-out</span>
+                                <span class="info-value" id="confirmation-checkout">Nov 20, 2023</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Duration</span>
+                                <span class="info-value" id="confirmation-duration">5 nights</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Guests</span>
+                                <span class="info-value" id="confirmation-guests">2 Adults, 1 Child</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Rooms</span>
+                                <span class="info-value" id="confirmation-rooms">1 Room</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <h2>Payment Details</h2>
+                        <div class="payment-info">
+                            <div class="info-row">
+                                <span class="info-label">Payment Method</span>
+                                <span class="info-value" id="payment-method">Credit Card ending in 4242</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Payment Date</span>
+                                <span class="info-value" id="payment-date">Nov 10, 2023 at 2:30 PM</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Amount Paid</span>
+                                <span class="info-value" id="amount-paid">₹48,150.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <h2>Guest Information</h2>
+                        <div class="guest-info">
+                            <div class="info-row">
+                                <span class="info-label">Primary Guest</span>
+                                <span class="info-value" id="primary-guest">John Doe</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Email</span>
+                                <span class="info-value" id="guest-email">john.doe@example.com</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Phone</span>
+                                <span class="info-value" id="guest-phone">+91 9876543210</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="confirmation-actions">
+                    <div class="action-card">
+                        <h3>Your next steps</h3>
+                        <div class="action-buttons">
+                            <a href="#" class="action-btn download-btn">
+                                <svg viewBox="0 0 24 24" width="20" height="20">
+                                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                                </svg>
+                                Download Receipt
+                            </a>
+                            <a href="#" class="action-btn calendar-btn">
+                                <svg viewBox="0 0 24 24" width="20" height="20">
+                                    <path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/>
+                                </svg>
+                                Add to Calendar
+                            </a>
+                            <a href="index.html" class="action-btn home-btn">
+                                <svg viewBox="0 0 24 24" width="20" height="20">
+                                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                                </svg>
+                                Back to Home
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="action-card">
+                        <h3>Need help with your booking?</h3>
+                        <p>Our customer service team is available 24/7 to assist you.</p>
+                        <div class="contact-options">
+                            <a href="tel:+91987654321" class="contact-option">
+                                <svg viewBox="0 0 24 24" width="20" height="20">
+                                    <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+                                </svg>
+                                +91 987 654321
+                            </a>
+                            <a href="mailto:support@cozyhaven.com" class="contact-option">
+                                <svg viewBox="0 0 24 24" width="20" height="20">
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                                support@cozyhaven.com
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="action-card">
+                        <h3>Prepare for your stay</h3>
+                        <ul class="preparation-list">
+                            <li>
+                                <svg viewBox="0 0 24 24" width="16" height="16">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                                Check your email for booking confirmation
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" width="16" height="16">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                                Bring a valid ID and your confirmation number
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" width="16" height="16">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                                Review the hotel's cancellation policy
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" width="16" height="16">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                                Consider purchasing travel insurance
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Cozy Haven</h3>
+                    <p>Luxury hotels with exceptional service and amenities to make your stay unforgettable.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#recommendations">Top Hotels</a></li>
+                        <li><a href="coupons.html">Coupons & Discounts</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#help">Help</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>123, North Street</li>
+                        <li>Mayiladuthurai, 609001</li>
+                        <li>+91 987 654321</li>
+                        <li>contact@cozyhaven.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Cozy Haven Stays. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form class="modal-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+                <div class="form-footer">
+                    <p>Don't have an account? <a href="#" id="showSignup">Sign up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create Account</h2>
+            <form class="modal-form" id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirm">Confirm Password</label>
+                    <input type="password" id="signupConfirm" required>
+                </div>
+                <button type="submit" class="submit-btn">Sign Up</button>
+                <div class="form-footer">
+                    <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="confirmation.js"></script>
+</body>
+</html>

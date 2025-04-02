@@ -16,17 +16,6 @@ loginBtn.addEventListener('click', () => {
     signupModal.style.display = 'none';
 });
 
-// Social Login Buttons
-document.querySelector('.google-btn')?.addEventListener('click', function() {
-    alert('Redirecting to Google login...');
-    // In a real app, implement OAuth flow
-});
-
-document.querySelector('.facebook-btn')?.addEventListener('click', function() {
-    alert('Redirecting to Facebook login...');
-    // In a real app, implement OAuth flow
-});
-
 // Open Signup Modal
 signupBtn.addEventListener('click', () => {
     signupModal.style.display = 'block';
@@ -105,7 +94,6 @@ signupForm.addEventListener('submit', (e) => {
     signupModal.style.display = 'none';
 });
 
-// Set default dates for search form
 document.addEventListener('DOMContentLoaded', () => {
     const today = new Date();
     const tomorrow = new Date(today);
@@ -116,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Room selector functionality
     const roomInput = document.getElementById('rooms');
     const roomPlusBtn = roomInput.closest('.room-selector').querySelector('.plus');
     const roomMinusBtn = roomInput.closest('.room-selector').querySelector('.minus');
@@ -131,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (value > 0) roomInput.value = value - 1;
     });
 
-    // Adults selector functionality
     const adultsInput = document.getElementById('adults');
     const adultsPlusBtn = adultsInput.closest('.adults-selector').querySelector('.plus');
     const adultsMinusBtn = adultsInput.closest('.adults-selector').querySelector('.minus');
@@ -146,7 +132,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (value > 0) adultsInput.value = value - 1;
     });
 
-    // Children selector functionality
     const childrenInput = document.getElementById('children');
     const childrenPlusBtn = childrenInput.closest('.children-selector').querySelector('.plus');
     const childrenMinusBtn = childrenInput.closest('.children-selector').querySelector('.minus');
@@ -249,17 +234,45 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Search form submission
 document.getElementById('searchForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
+    // Get form values
+    const destination = document.getElementById('destination').value;
+    const checkin = document.getElementById('checkin').value;
+    const checkout = document.getElementById('checkout').value;
+    const rooms = document.getElementById('rooms').value;
+    const adults = document.getElementById('adults').value;
+    const children = document.getElementById('children').value || 0;
+
+    // Validate dates
+    if (new Date(checkout) <= new Date(checkin)) {
+        alert("Check-out date must be after check-in date");
+        return;
+    }
+
+    // Create URL with search parameters
     const params = new URLSearchParams({
-        destination: document.getElementById('destination').value,
-        checkin: document.getElementById('checkin').value,
-        checkout: document.getElementById('checkout').value,
-        rooms: document.getElementById('rooms').value,
-        adults: document.getElementById('adults').value,
-        children: document.getElementById('children').value || 0
+        destination: destination,
+        checkin: checkin,
+        checkout: checkout,
+        rooms: rooms,
+        adults: adults,
+        children: children
     });
+
+    // Redirect to hotel listings page
+    window.location.href = `hotel-details.html?${params.toString()}`;
+});
+
+// Set default dates (today and tomorrow)
+document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
     
-    window.location.href = `hotel-listings.html?${params.toString()}`;
+    // Format as YYYY-MM-DD (required by date inputs)
+    document.getElementById('checkin').valueAsDate = today;
+    document.getElementById('checkout').valueAsDate = tomorrow;
 });

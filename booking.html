@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Booking | Cozy Haven Stay</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Cozy Haven <span>Stay</span></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#recommendations">Top Hotels</a></li>
+                    <li><a href="coupons.html">Coupons & Discounts</a></li>
+                    <li><a href="index.html#about">About us</a></li>
+                    <li><a href="index.html#help">Help</a></li>
+                </ul>
+            </nav>
+            
+            </div>
+        </div>
+    </header>
+
+    <!-- Booking Main Content -->
+    <main class="booking-container">
+        <div class="container">
+            <div class="booking-header">
+                <h1>Complete Your Booking</h1>
+                <div class="booking-progress">
+                    <div class="progress-step active">
+                        <span class="step-number">1</span>
+                        <span class="step-label">Your Details</span>
+                    </div>
+                    <div class="progress-step">
+                        <span class="step-number">2</span>
+                        <span class="step-label">Payment</span>
+                    </div>
+                    <div class="progress-step">
+                        <span class="step-number">3</span>
+                        <span class="step-label">Confirmation</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="booking-content">
+                <div class="booking-summary">
+                    <div class="hotel-info">
+                        <h2 id="booking-hotel-name">Grand Horizon Palace</h2>
+                        <div class="hotel-location">
+                            <svg viewBox="0 0 24 24" width="14" height="14">
+                                <path d="M12 0C7.312 0 3 4.312 3 9c0 6.25 9 15 9 15s9-8.75 9-15c0-4.688-4.312-9-9-9zm0 13.5c-2.481 0-4.5-2.019-4.5-4.5s2.019-4.5 4.5-4.5 4.5 2.019 4.5 4.5-2.019 4.5-4.5 4.5z"/>
+                            </svg>
+                            <span id="booking-hotel-location">Central District, Delhi</span>
+                        </div>
+                        <div class="hotel-rating">
+                            <span class="star-rating">★★★★★</span>
+                            <span class="reviews">(1,284 reviews)</span>
+                        </div>
+                        <img id="booking-hotel-image" src="https://images.unsplash.com/photo-1566073771259-6a8506099945" alt="Hotel Image" class="hotel-image">
+                    </div>
+
+                    <div class="booking-dates">
+                        <h3>Your Stay</h3>
+                        <div class="date-info">
+                            <div class="date-item">
+                                <span class="date-label">Check-in</span>
+                                <span class="date-value" id="checkin-date">Nov 15, 2023</span>
+                            </div>
+                            <div class="date-item">
+                                <span class="date-label">Check-out</span>
+                                <span class="date-value" id="checkout-date">Nov 20, 2023</span>
+                            </div>
+                            <div class="date-item">
+                                <span class="date-label">Duration</span>
+                                <span class="date-value" id="stay-duration">5 nights</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="booking-guests">
+                        <h3>Guests</h3>
+                        <div class="guest-info">
+                            <div class="guest-item">
+                                <span class="guest-label">Adults</span>
+                                <span class="guest-value" id="adults-count">2</span>
+                            </div>
+                            <div class="guest-item">
+                                <span class="guest-label">Children</span>
+                                <span class="guest-value" id="children-count">1</span>
+                            </div>
+                            <div class="guest-item">
+                                <span class="guest-label">Rooms</span>
+                                <span class="guest-value" id="rooms-count">1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-summary">
+                        <h3>Price Summary</h3>
+                        <div class="price-details">
+                            <div class="price-item">
+                                <span class="price-label">Room (5 nights)</span>
+                                <span class="price-value">₹45,000</span>
+                            </div>
+                            <div class="price-item">
+                                <span class="price-label">Taxes & Fees</span>
+                                <span class="price-value">₹5,400</span>
+                            </div>
+                            <div class="price-item total">
+                                <span class="price-label">Total</span>
+                                <span class="price-value">₹50,400</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="coupon-apply">
+                        <h3>Apply Coupon</h3>
+                        <div class="coupon-input">
+                            <input type="text" placeholder="Enter coupon code">
+                            <button class="apply-btn">Apply</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-form">
+                    <h2>Guest Information</h2>
+                    <form id="bookingForm">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="specialRequests">Special Requests (Optional)</label>
+                            <textarea id="specialRequests" rows="3"></textarea>
+                        </div>
+
+                        <h2>Payment Information</h2>
+                        <div class="form-group">
+                            <label for="cardName">Name on Card</label>
+                            <input type="text" id="cardName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" id="cardNumber" required placeholder="1234 5678 9012 3456">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiryDate">Expiry Date</label>
+                                <input type="text" id="expiryDate" required placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" required placeholder="123">
+                            </div>
+                        </div>
+
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="savePayment" checked>
+                            <label for="savePayment">Save payment information for future bookings</label>
+                        </div>
+
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <label for="agreeTerms">I agree to the <a href="#">terms and conditions</a> and <a href="#">privacy policy</a></label>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Complete Booking</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Cozy Haven</h3>
+                    <p>Luxury hotels with exceptional service and amenities to make your stay unforgettable.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#recommendations">Top Hotels</a></li>
+                        <li><a href="coupons.html">Coupons & Discounts</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#help">Help</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>123, North Street</li>
+                        <li>Mayiladuthurai, 609001</li>
+                        <li>+91 987 654321</li>
+                        <li>contact@cozyhaven.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Cozy Haven Stays. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form class="modal-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+                <div class="form-footer">
+                    <p>Don't have an account? <a href="#" id="showSignup">Sign up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create Account</h2>
+            <form class="modal-form" id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirm">Confirm Password</label>
+                    <input type="password" id="signupConfirm" required>
+                </div>
+                <button type="submit" class="submit-btn">Sign Up</button>
+                <div class="form-footer">
+                    <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="booking.js"></script>
+</body>
+</html>
