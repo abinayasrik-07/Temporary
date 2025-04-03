@@ -1124,3 +1124,186 @@ footer {
         font-size: 1.2rem;
     }
 }
+
+/* User Menu Styles */
+.user-menu {
+    position: relative;
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.user-icon {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    color: #003580;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9rem;
+}
+
+.dropdown-content a:hover {
+    background-color: #f0f7ff;
+}
+
+.user-menu:hover .dropdown-content {
+    display: block;
+}
+
+/* Wishlist Heart Icon */
+.wishlist-heart {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background: rgba(255,255,255,0.7);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.wishlist-heart:hover {
+    transform: scale(1.1);
+}
+
+.wishlist-heart.active {
+    color: red;
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #003580;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+    animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; bottom: 0; }
+    10% { opacity: 1; bottom: 20px; }
+    90% { opacity: 1; bottom: 20px; }
+    100% { opacity: 0; bottom: 0; }
+}
+
+/* Add these styles to your CSS */
+.member-discount {
+    padding: 12rem 0;
+    background-color: #f8fafc;
+}
+
+.discount-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    position: relative;
+}
+
+.discount-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #003580;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.discount-content {
+    padding: 2rem;
+    text-align: center;
+}
+
+.discount-content h2 {
+    color: #003580;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.discount-description {
+    color: #4b5563;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.discount-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.signin-btn {
+    padding: 0.8rem 2rem;
+    background-color: #003580;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.signin-btn:hover {
+    background-color: #002366;
+}
+
+.terms {
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.view-all-offers {
+    text-align: center;
+}
+
+.view-all-offers a {
+    color: #003580;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: color 0.3s;
+}
+
+.view-all-offers a:hover {
+    color: #febb02;
+    text-decoration: underline;
+}

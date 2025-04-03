@@ -276,3 +276,88 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('checkin').valueAsDate = today;
     document.getElementById('checkout').valueAsDate = tomorrow;
 });
+
+// Wishlist functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize wishlist from localStorage
+    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    
+    // Update all heart icons based on wishlist
+    function updateHeartIcons() {
+        document.querySelectorAll('.wishlist-heart').forEach(heart => {
+            const hotelId = heart.getAttribute('data-hotel-id');
+            if (wishlist.includes(hotelId)) {
+                heart.innerHTML = '❤️';
+                heart.classList.add('active');
+            } else {
+                heart.innerHTML = '♡';
+                heart.classList.remove('active');
+            }
+        });
+    }
+    
+    // Handle heart clicks
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('wishlist-heart')) {
+            const hotelId = e.target.getAttribute('data-hotel-id');
+            const index = wishlist.indexOf(hotelId);
+            
+            if (index === -1) {
+                // Add to wishlist
+                wishlist.push(hotelId);
+                e.target.innerHTML = '❤️';
+                e.target.classList.add('active');
+                showToast('Added to wishlist!');
+            } else {
+                // Remove from wishlist
+                wishlist.splice(index, 1);
+                e.target.innerHTML = '♡';
+                e.target.classList.remove('active');
+                showToast('Removed from wishlist');
+            }
+            
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        }
+    });
+    
+    // Simple toast notification
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.remove();
+        }, 2000);
+    }
+    
+    // User menu toggle (you'll need to implement actual auth)
+    const userIcon = document.getElementById('userIcon');
+    if (userIcon) {
+        userIcon.addEventListener('click', function() {
+            // This would be replaced with actual auth check
+            const userMenu = document.getElementById('userMenu');
+            if (localStorage.getItem('loggedInUser')) {
+                userMenu.style.display = 'inline-block';
+            }
+        });
+    }
+    
+    // Initial update of hearts
+    updateHeartIcons();
+});
+
+// Add this to your script.js
+document.addEventListener('DOMContentLoaded', function() {
+    const signinBtn = document.getElementById('memberSigninBtn');
+    
+    signinBtn.addEventListener('click', function() {
+        // In a real implementation, this would open the login modal
+        // For this example, we'll show a simple message
+        alert("Please sign in to your Cozy Haven account to access member discounts. We'll automatically apply your 10% savings at checkout.");
+        
+        // In your actual implementation, you might use:
+        // document.getElementById('loginModal').style.display = 'block';
+    });
+});

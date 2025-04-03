@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist - Cozy Haven Stay</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .wishlist-container {
+            padding: 4rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .wishlist-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+        
+        .empty-wishlist {
+            text-align: center;
+            padding: 4rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header (same as index.html) -->
+    
+    <main class="wishlist-container">
+        <div class="wishlist-header">
+            <h1>My Wishlist</h1>
+            <p>Your saved hotels for future stays</p>
+        </div>
+        
+        <div class="wishlist-grid" id="wishlistGrid">
+            <!-- Hotels will be added dynamically -->
+        </div>
+        
+        <div class="empty-wishlist" id="emptyWishlist" style="display:none;">
+            <h3>Your wishlist is empty</h3>
+            <p>Save hotels by clicking the heart icon ❤️</p>
+            <a href="index.html" class="btn-primary">Browse Hotels</a>
+        </div>
+    </main>
+    
+    <!-- Footer (same as index.html) -->
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const wishlistGrid = document.getElementById('wishlistGrid');
+            const emptyWishlist = document.getElementById('emptyWishlist');
+            
+            if (wishlist.length === 0) {
+                emptyWishlist.style.display = 'block';
+                return;
+            }
+            
+            // In a real app, you would fetch hotel details from an API
+            // Here we'll just show the IDs as an example
+            wishlist.forEach(hotelId => {
+                const hotelCard = document.createElement('div');
+                hotelCard.className = 'hotel-card';
+                hotelCard.innerHTML = `
+                    <div class="hotel-image" style="background-image: url('https://via.placeholder.com/300x200?text=Hotel+${hotelId}')">
+                        <div class="wishlist-heart active" data-hotel-id="${hotelId}">❤️</div>
+                    </div>
+                    <div class="hotel-details">
+                        <div class="hotel-rating">
+                            <span class="star-rating">★★★★★</span>
+                            <span class="reviews">(1284 reviews)</span>
+                        </div>
+                        <h3>Hotel ${hotelId}</h3>
+                        <div class="hotel-location">
+                            <svg viewBox="0 0 24 24" width="16" height="16">
+                                <path d="M12 0C7.312 0 3 4.312 3 9c0 6.25 9 15 9 15s9-8.75 9-15c0-4.688-4.312-9-9-9zm0 13.5c-2.481 0-4.5-2.019-4.5-4.5s2.019-4.5 4.5-4.5 4.5 2.019 4.5 4.5-2.019 4.5-4.5 4.5z"/>
+                            </svg>
+                            Location ${hotelId}
+                        </div>
+                        <div class="price">${Math.floor(Math.random() * 100) + 50}$<span>/night</span></div>
+                        <a href="hotel-details.html?id=${hotelId}" class="book-now-btn">View Details</a>
+                    </div>
+                `;
+                wishlistGrid.appendChild(hotelCard);
+            });
+        });
+    </script>
+</body>
+</html>

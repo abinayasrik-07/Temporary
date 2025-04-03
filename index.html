@@ -14,6 +14,7 @@
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
+                    <li><a href="#discount">Discounts</a></li>
                     <li><a href="#recommendations">Recommendations</a></li>
                     <li><a href="#about">About us</a></li>
                     <li><a href="#help">Help</a></li>
@@ -22,6 +23,14 @@
             <div class="auth-buttons">
                 <button id="loginBtn">Login</button>
                 <button id="signupBtn">Sign Up</button>
+            </div>
+            <div class="user-menu" id="userMenu" style="display:none;">
+                <button class="user-icon" id="userIcon">👤</button>
+                <div class="dropdown-content">
+                    <a href="#" id="wishlistLink">❤️ My Wishlist</a>
+                    <a href="#" id="profileLink">👤 My Profile</a>
+                    <a href="#" id="logoutLink">🚪 Logout</a>
+                </div>
             </div>
         </div>
     </header>
@@ -78,51 +87,17 @@
     </section>
 
     <!-- Special Offers Section -->
-    <section class="special-offers">
+    <!-- Replace the special-offers section in your home page with this -->
+    <section class="member-discount" id="discount">
         <div class="container">
-            <h2 class="section-title">Exclusive Discounts</h2>
-            <p class="section-subtitle">Unlock special savings for your next stay</p>
-            
-            <div class="offer-cards">
-                <!-- Discount Card 1 -->
-                <div class="offer-card">
-                    <div class="offer-badge">LIMITED TIME</div>
-                    <div class="offer-content">
-                        <h3>Summer Getaway Deal</h3>
-                        <p class="offer-description">Save 25% on all beach resorts when booking before August 31st</p>
-                        <div class="offer-meta">
-                            <span class="offer-price">25% OFF</span>
-                            <span class="offer-code">SUMMER25</span>
-                        </div>
-                        <button class="offer-button">View Eligible Hotels</button>
-                    </div>
-                </div>
-                
-                <!-- Discount Card 2 -->
-                <div class="offer-card highlight">
-                    <div class="offer-badge">POPULAR</div>
-                    <div class="offer-content">
-                        <h3>Weekend Special</h3>
-                        <p class="offer-description">15% off weekend stays at luxury city hotels</p>
-                        <div class="offer-meta">
-                            <span class="offer-price">15% OFF</span>
-                            <span class="offer-code">WEEKEND15</span>
-                        </div>
-                        <button class="offer-button">Book Now</button>
-                    </div>
-                </div>
-                
-                <!-- Discount Card 3 -->
-                <div class="offer-card">
-                    <div class="offer-badge">NEW</div>
-                    <div class="offer-content">
-                        <h3>First Booking Bonus</h3>
-                        <p class="offer-description">20% discount for first-time users</p>
-                        <div class="offer-meta">
-                            <span class="offer-price">20% OFF</span>
-                            <span class="offer-code">WELCOME20</span>
-                        </div>
-                        <button class="offer-button">Claim Offer</button>
+            <div class="discount-card">
+                <div class="discount-badge">MEMBERS ONLY</div>
+                <div class="discount-content">
+                    <h2>Members Save 10% or More</h2>
+                    <p class="discount-description">Exclusive discount on over 100,000 hotels worldwide when you're signed in to your Cozy Haven account.</p>
+                    <div class="discount-cta">
+                        <button class="signin-btn" id="memberSigninBtn">Sign In to Unlock</button>
+                        <span class="terms">No coupon needed - discount applied automatically</span>
                     </div>
                 </div>
             </div>
@@ -142,6 +117,7 @@
                 <div class="recommendations-carousel">
                     <div class="hotel-card">
                         <div class="hotel-image" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945')"></div>
+                            <div class="wishlist-heart" data-hotel-id="1">♡</div>
                         <div class="hotel-details">
                             <div class="hotel-rating">
                                 <span class="star-rating">★★★★★</span>
@@ -161,6 +137,7 @@
     
                     <div class="hotel-card">
                         <div class="hotel-image" style="background-image: url('https://images.unsplash.com/photo-1564501049412-61c2a3083791')"></div>
+                            <div class="wishlist-heart" data-hotel-id="1">♡</div>
                         <div class="hotel-details">
                             <div class="hotel-rating">
                                 <span class="star-rating">★★★★☆</span>
@@ -180,6 +157,7 @@
     
                     <div class="hotel-card">
                         <div class="hotel-image" style="background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d')"></div>
+                            <div class="wishlist-heart" data-hotel-id="1">♡</div>
                         <div class="hotel-details">
                             <div class="hotel-rating">
                                 <span class="star-rating">★★★★☆</span>
@@ -199,6 +177,7 @@
     
                     <div class="hotel-card">
                         <div class="hotel-image" style="background-image: url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa')"></div>
+                            <div class="wishlist-heart" data-hotel-id="1">♡</div>
                         <div class="hotel-details">
                             <div class="hotel-rating">
                                 <span class="star-rating">★★★★★</span>
