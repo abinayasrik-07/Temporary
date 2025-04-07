@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Listings | Cozy Haven Stay</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .hotels-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .hotels-header h1 {
+            color: #003580;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hotels-header p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .search-summary {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .search-summary h2 {
+            color: #003580;
+            margin-bottom: 0.5rem;
+        }
+        
+        .search-summary p {
+            color: #666;
+        }
+        
+        .search-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .filter-dropdown {
+            padding: 0.8rem 1.2rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background-color: white;
+            font-size: 0.95rem;
+            color: #334155;
+            flex: 1 1 200px;
+            min-width: 180px;
+            cursor: pointer;
+        }
+        
+        .filter-dropdown:hover {
+            border-color: #94a3b8;
+        }
+        
+        .filter-dropdown:focus {
+            outline: none;
+            border-color: #003580;
+        }
+        
+        .hotels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .hotel-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 53, 128, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .hotel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 53, 128, 0.15);
+        }
+        
+        .hotel-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .hotel-details {
+            padding: 1.5rem;
+        }
+        
+        .hotel-name {
+            color: #003580;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .hotel-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+        
+        .hotel-location svg {
+            fill: #666;
+        }
+        
+        .hotel-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .star-rating {
+            color: #ffb700;
+            font-size: 1rem;
+        }
+        
+        .reviews {
+            color: #666;
+            font-size: 0.85rem;
+        }
+        
+        .hotel-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #003580;
+            margin: 1rem 0;
+        }
+        
+        .hotel-price span {
+            font-size: 1rem;
+            font-weight: normal;
+            color: #666;
+        }
+        
+        .amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .amenity {
+            background-color: #f0f7ff;
+            color: #003580;
+            padding: 0.3rem 0.7rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .view-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #003580;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .view-btn:hover {
+            background-color: #002366;
+        }
+        
+        .no-results {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 2rem;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .hotels-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hotels-header h1 {
+                font-size: 2rem;
+            }
+            
+            .filter-dropdown {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+                padding: 1.5rem 0;
+            }
+            
+            .hotel-details {
+                padding: 1.2rem;
+            }
+            
+            .hotel-name {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div class="hotels-header">
+            <h1>Discover Amazing Hotels</h1>
+            <p>Browse our collection of premium hotels across the world</p>
+        </div>
+        
+        <!-- Search Summary (shown when coming from search) -->
+        <div class="search-summary" id="searchSummary" style="display: none;">
+            <h2>Hotels in <span id="search-location">Loading...</span></h2>
+            <p>
+                <span id="search-dates">Loading dates...</span> | 
+                <span id="search-guests">Loading guests...</span> | 
+                <span id="search-rooms">Loading rooms...</span>
+            </p>
+        </div>
+        
+        <!-- Search Filters (shown when coming from search) -->
+        <div class="search-filters" id="searchFilters" style="display: none;">
+            <select class="filter-dropdown" id="sort-by">
+                <option value="recommended">Recommended</option>
+                <option value="price-low">Price (Low to High)</option>
+                <option value="price-high">Price (High to Low)</option>
+                <option value="rating">Guest Rating</option>
+            </select>
+            
+            <select class="filter-dropdown" id="price-range">
+                <option value="all">All Prices</option>
+                <option value="0-5000">Under ₹5,000</option>
+                <option value="5000-10000">₹5,000 - ₹10,000</option>
+                <option value="10000-20000">₹10,000 - ₹20,000</option>
+                <option value="20000+">Over ₹20,000</option>
+            </select>
+            
+            <select class="filter-dropdown" id="star-rating">
+                <option value="all">All Ratings</option>
+                <option value="5">5 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="3">3 Stars</option>
+            </select>
+        </div>
+        
+        <div class="hotels-grid" id="hotelsContainer">
+            <!-- Hotels will be inserted here by JavaScript -->
+        </div>
+    </main>
+
+    <script>
+        // Hotels data - in production this would come from an API or external file
+        const hotels = [
+            {
+                id: 1,
+                name: "Grand Horizon Palace",
+                location: "Central District, Delhi",
+                rating: 4.8,
+                reviews: 1284,
+                price: 9000,
+                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+                amenities: ["Pool", "Spa", "Restaurant", "Free WiFi"],
+                stars: 5
+            },
+            {
+                id: 2,
+                name: "Taj Mahal Palace",
+                location: "Colaba, Mumbai",
+                rating: 4.9,
+                reviews: 2456,
+                price: 25000,
+                image: "https://images.unsplash.com/photo-1583417319070-4a69db38a482",
+                amenities: ["Sea View", "Historic", "Luxury Spa", "Fine Dining"],
+                stars: 5
+            },
+            {
+                id: 3,
+                name: "The Leela Palace",
+                location: "Bengaluru, Karnataka",
+                rating: 4.7,
+                reviews: 1872,
+                price: 18000,
+                image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791",
+                amenities: ["Gardens", "Pool", "Ayurvedic Spa", "Business Center"],
+                stars: 5
+            },
+            {
+                id: 4,
+                name: "ITC Grand Chola",
+                location: "Guindy, Chennai",
+                rating: 4.6,
+                reviews: 1563,
+                price: 15000,
+                image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d",
+                amenities: ["Heritage", "Golf Course", "9 Dining Options", "Grand Ballroom"],
+                stars: 5
+            },
+            {
+                id: 5,
+                name: "The Oberoi Udaivilas",
+                location: "Udaipur, Rajasthan",
+                rating: 4.9,
+                reviews: 2105,
+                price: 35000,
+                image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa",
+                amenities: ["Lake View", "Private Pool", "Yoga Pavilion", "Boat Rides"],
+                stars: 5
+            },
+            {
+                id: 6,
+                name: "Hyatt Regency",
+                location: "Pune, Maharashtra",
+                rating: 4.5,
+                reviews: 1320,
+                price: 12000,
+                image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4",
+                amenities: ["Rooftop Pool", "24/7 Gym", "Conference Rooms", "Kids Club"],
+                stars: 4
+            },
+            {
+                id: 7,
+                name: "Radisson Blu Plaza",
+                location: "Hyderabad, Telangana",
+                rating: 4.4,
+                reviews: 987,
+                price: 8500,
+                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+                amenities: ["Airport Shuttle", "Spa", "Bar", "Free Parking"],
+                stars: 4
+            },
+            {
+                id: 8,
+                name: "The Lalit Goa",
+                location: "Goa",
+                rating: 4.6,
+                reviews: 1850,
+                price: 11000,
+                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+                amenities: ["Beach Access", "Pool", "Water Sports", "Free WiFi"],
+                stars: 5
+            },
+            {
+                id: 9,
+                name: "Taj Lake Palace",
+                location: "Udaipur, Rajasthan",
+                rating: 4.9,
+                reviews: 3200,
+                price: 38000,
+                image: "https://images.unsplash.com/photo-1583417319070-4a69db38a482",
+                amenities: ["Lake View", "Boat Transfer", "Fine Dining", "Luxury Spa"],
+                stars: 5
+            },
+            {
+                id: 10,
+                name: "The Oberoi Amarvilas",
+                location: "Agra, Uttar Pradesh",
+                rating: 4.8,
+                reviews: 2780,
+                price: 42000,
+                image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791",
+                amenities: ["Taj Mahal View", "Private Pool", "Butler Service", "Luxury Spa"],
+                stars: 5
+            },
+            {
+                id: 11,
+                name: "Taj Falaknuma Palace",
+                location: "Hyderabad, Telangana",
+                rating: 4.9,
+                reviews: 1950,
+                price: 45000,
+                image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d",
+                amenities: ["Palace Stay", "Horse Carriage Ride", "Fine Dining", "Library"],
+                stars: 5
+            },
+            {
+                id: 12,
+                name: "The Leela Kovalam",
+                location: "Kovalam, Kerala",
+                rating: 4.7,
+                reviews: 1420,
+                price: 22000,
+                image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa",
+                amenities: ["Beachfront", "Ayurveda Center", "Cliff-top Pool", "Yoga"],
+                stars: 5
+            },
+            {
+                id: 13,
+                name: "Taj West End",
+                location: "Bengaluru, Karnataka",
+                rating: 4.6,
+                reviews: 1680,
+                price: 15000,
+                image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4",
+                amenities: ["Heritage", "Garden", "Pool", "Spa"],
+                stars: 5
+            },
+            {
+                id: 14,
+                name: "The Imperial New Delhi",
+                location: "New Delhi",
+                rating: 4.7,
+                reviews: 2100,
+                price: 18000,
+                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+                amenities: ["Historic", "Art Collection", "Fine Dining", "Spa"],
+                stars: 5
+            },
+            {
+                id: 15,
+                name: "Taj Lands End",
+                location: "Mumbai, Maharashtra",
+                rating: 4.6,
+                reviews: 1950,
+                price: 20000,
+                image: "https://images.unsplash.com/photo-1583417319070-4a69db38a482",
+                amenities: ["Sea View", "Infinity Pool", "Spa", "Kids Club"],
+                stars: 5
+            },
+            {
+                id: 16,
+                name: "ITC Maratha",
+                location: "Mumbai, Maharashtra",
+                rating: 4.5,
+                reviews: 1750,
+                price: 16000,
+                image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791",
+                amenities: ["Airport Proximity", "Spa", "Pool", "Business Center"],
+                stars: 5
+            },
+            {
+                id: 17,
+                name: "The Oberoi Grand",
+                location: "Kolkata, West Bengal",
+                rating: 4.7,
+                reviews: 1850,
+                price: 17000,
+                image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d",
+                amenities: ["Heritage", "City Center", "Spa", "Fine Dining"],
+                stars: 5
+            },
+            {
+                id: 18,
+                name: "Taj Fort Aguada Resort",
+                location: "Goa",
+                rating: 4.6,
+                reviews: 1950,
+                price: 22000,
+                image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa",
+                amenities: ["Beach Access", "Fort View", "Pool", "Spa"],
+                stars: 5
+            },
+            {
+                id: 19,
+                name: "The Leela Ambience Gurugram",
+                location: "Gurugram, Haryana",
+                rating: 4.5,
+                reviews: 1450,
+                price: 14000,
+                image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4",
+                amenities: ["Business Center", "Spa", "Pool", "Fine Dining"],
+                stars: 5
+            },
+            {
+                id: 20,
+                name: "Taj Holiday Village Resort",
+                location: "Goa",
+                rating: 4.5,
+                reviews: 1650,
+                price: 18000,
+                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+                amenities: ["Beachfront", "Villa Stay", "Pool", "Water Sports"],
+                stars: 5
+            },
+            {
+                id: 21,
+                name: "The Leela Palace Jaipur",
+                location: "Jaipur, Rajasthan",
+                rating: 4.8,
+                reviews: 1250,
+                price: 25000,
+                image: "https://images.unsplash.com/photo-1583417319070-4a69db38a482",
+                amenities: ["Palace Stay", "Pool", "Spa", "Cultural Activities"],
+                stars: 5
+            },
+            {
+                id: 22,
+                name: "Taj Connemara",
+                location: "Chennai, Tamil Nadu",
+                rating: 4.4,
+                reviews: 950,
+                price: 12000,
+                image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791",
+                amenities: ["Heritage", "City Center", "Pool", "Spa"],
+                stars: 5
+            },
+            {
+                id: 23,
+                name: "The Ritz-Carlton",
+                location: "New York, USA",
+                rating: 4.8,
+                reviews: 3250,
+                price: 45000,
+                image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d",
+                amenities: ["Central Park View", "Luxury Spa", "Fine Dining", "Concierge"],
+                stars: 5
+            },
+            {
+                id: 24,
+                name: "Burj Al Arab",
+                location: "Dubai, UAE",
+                rating: 4.9,
+                reviews: 4200,
+                price: 75000,
+                image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa",
+                amenities: ["Private Beach", "Helipad", "Luxury Suites", "Butler Service"],
+                stars: 5
+            },
+            {
+                id: 25,
+                name: "Marina Bay Sands",
+                location: "Singapore",
+                rating: 4.7,
+                reviews: 3800,
+                price: 35000,
+                image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4",
+                amenities: ["Infinity Pool", "Casino", "Shopping", "SkyPark"],
+                stars: 5
+            },
+            {
+                id: 26,
+                name: "The Savoy",
+                location: "London, UK",
+                rating: 4.8,
+                reviews: 2950,
+                price: 40000,
+                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+                amenities: ["Historic", "Thames View", "Afternoon Tea", "Luxury Spa"],
+                stars: 5
+            },
+            {
+                id: 27,
+                name: "Mandarin Oriental",
+                location: "Bangkok, Thailand",
+                rating: 4.7,
+                reviews: 2450,
+                price: 22000,
+                image: "https://images.unsplash.com/photo-1583417319070-4a69db38a482",
+                amenities: ["River View", "Spa", "Rooftop Bar", "Cultural Tours"],
+                stars: 5
+            },
+            {
+                id: 28,
+                name: "Four Seasons Resort",
+                location: "Bali, Indonesia",
+                rating: 4.9,
+                reviews: 1950,
+                price: 38000,
+                image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791",
+                amenities: ["Beachfront", "Villas", "Spa", "Yoga"],
+                stars: 5
+            },
+            {
+                id: 29,
+                name: "Fairmont Banff Springs",
+                location: "Banff, Canada",
+                rating: 4.8,
+                reviews: 2250,
+                price: 32000,
+                image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d",
+                amenities: ["Mountain View", "Golf Course", "Hot Springs", "Hiking"],
+                stars: 5
+            },
+            {
+                id: 30,
+                name: "Park Hyatt",
+                location: "Sydney, Australia",
+                rating: 4.7,
+                reviews: 1850,
+                price: 28000,
+                image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa",
+                amenities: ["Harbour View", "Opera House Proximity", "Rooftop Pool", "Fine Dining"],
+                stars: 5
+            }
+        ];
+
+        // DOM elements
+        const searchSummary = document.getElementById('searchSummary');
+        const searchFilters = document.getElementById('searchFilters');
+        const hotelsContainer = document.getElementById('hotelsContainer');
+        const sortBy = document.getElementById('sort-by');
+        const priceRange = document.getElementById('price-range');
+        const starRating = document.getElementById('star-rating');
+
+        // Check if we have search parameters in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const hasSearchParams = urlParams.has('destination');
+
+        // Show/hide search summary and filters based on URL parameters
+        if (hasSearchParams) {
+            searchSummary.style.display = 'block';
+            searchFilters.style.display = 'flex';
+            parseSearchParams();
+        }
+
+        // Function to parse and display search parameters
+        function parseSearchParams() {
+            // Update search summary
+            if (urlParams.has('destination')) {
+                document.getElementById('search-location').textContent = urlParams.get('destination');
+            }
+            
+            if (urlParams.has('checkin') && urlParams.has('checkout')) {
+                const checkin = new Date(urlParams.get('checkin'));
+                const checkout = new Date(urlParams.get('checkout'));
+                const options = { month: 'short', day: 'numeric', year: 'numeric' };
+                document.getElementById('search-dates').textContent = 
+                    `${checkin.toLocaleDateString('en-US', options)} - ${checkout.toLocaleDateString('en-US', options)}`;
+            }
+            
+            if (urlParams.has('adults') && urlParams.has('children')) {
+                const adults = urlParams.get('adults');
+                const children = urlParams.get('children');
+                let guestsText = `${adults} Adult${adults > 1 ? 's' : ''}`;
+                if (children > 0) {
+                    guestsText += `, ${children} Child${children > 1 ? 'ren' : ''}`;
+                }
+                document.getElementById('search-guests').textContent = guestsText;
+            }
+            
+            if (urlParams.has('rooms')) {
+                document.getElementById('search-rooms').textContent = 
+                    `${urlParams.get('rooms')} Room${urlParams.get('rooms') > 1 ? 's' : ''}`;
+            }
+        }
+
+        // Function to filter and sort hotels
+        function updateHotels() {
+            let filteredHotels = [...hotels];
+            
+            // Filter by location if coming from search
+            if (hasSearchParams && urlParams.has('destination')) {
+                const searchLocation = urlParams.get('destination').toLowerCase();
+                filteredHotels = filteredHotels.filter(hotel => 
+                    hotel.location.toLowerCase().includes(searchLocation));
+            }
+            
+            // Apply filters if they're visible (coming from search)
+            if (searchFilters.style.display === 'flex') {
+                // Filter by price range
+                if (priceRange.value !== 'all') {
+                    const [min, max] = priceRange.value.split('-').map(val => 
+                        val.endsWith('+') ? Number(val.replace('+', '')) : Number(val));
+                    
+                    filteredHotels = filteredHotels.filter(hotel => {
+                        if (priceRange.value.endsWith('+')) {
+                            return hotel.price >= min;
+                        }
+                        return hotel.price >= min && hotel.price <= max;
+                    });
+                }
+                
+                // Filter by star rating
+                if (starRating.value !== 'all') {
+                    const rating = Number(starRating.value);
+                    filteredHotels = filteredHotels.filter(hotel => hotel.stars === rating);
+                }
+                
+                // Sort hotels
+                switch(sortBy.value) {
+                    case 'price-low':
+                        filteredHotels.sort((a, b) => a.price - b.price);
+                        break;
+                    case 'price-high':
+                        filteredHotels.sort((a, b) => b.price - a.price);
+                        break;
+                    case 'rating':
+                        filteredHotels.sort((a, b) => b.rating - a.rating);
+                        break;
+                    default:
+                        // Default sort by recommended (combination of rating and reviews)
+                        filteredHotels.sort((a, b) => (b.rating * 100 + b.reviews) - (a.rating * 100 + a.reviews));
+                }
+            } else {
+                // Default sorting for non-search views
+                filteredHotels.sort((a, b) => (b.rating * 100 + b.reviews) - (a.rating * 100 + a.reviews));
+            }
+            
+            displayHotels(filteredHotels);
+        }
+
+        // Function to display hotels
+        function displayHotels(filteredHotels) {
+            hotelsContainer.innerHTML = '';
+            
+            if (filteredHotels.length === 0) {
+                hotelsContainer.innerHTML = '<p class="no-results">No hotels found matching your criteria. Please try different filters.</p>';
+                return;
+            }
+            
+            filteredHotels.forEach(hotel => {
+                const stars = '★'.repeat(hotel.stars) + '☆'.repeat(5 - hotel.stars);
+                
+                const hotelCard = document.createElement('div');
+                hotelCard.className = 'hotel-card';
+                hotelCard.innerHTML = `
+                    <img src="${hotel.image}" alt="${hotel.name}" class="hotel-image">
+                    <div class="hotel-details">
+                        <h3 class="hotel-name">${hotel.name}</h3>
+                        <div class="hotel-location">
+                            <svg viewBox="0 0 24 24" width="16" height="16">
+                                <path d="M12 0C7.312 0 3 4.312 3 9c0 6.25 9 15 9 15s9-8.75 9-15c0-4.688-4.312-9-9-9zm0 13.5c-2.481 0-4.5-2.019-4.5-4.5s2.019-4.5 4.5-4.5 4.5 2.019 4.5 4.5-2.019 4.5-4.5 4.5z"/>
+                            </svg>
+                            <span>${hotel.location}</span>
+                        </div>
+                        <div class="hotel-rating">
+                            <span class="star-rating">${stars}</span>
+                            <span class="reviews">(${hotel.reviews.toLocaleString()} reviews)</span>
+                        </div>
+                        <div class="amenities">
+                            ${hotel.amenities.map(amenity => `<span class="amenity">${amenity}</span>`).join('')}
+                        </div>
+                        <div class="hotel-price">₹${hotel.price.toLocaleString()}<span>/night</span></div>
+                        <a href="hotel-details.html?id=${hotel.id}" class="view-btn">View Details</a>
+                    </div>
+                `;
+                
+                hotelsContainer.appendChild(hotelCard);
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set up event listeners for filters if they exist
+            if (sortBy) {
+                sortBy.addEventListener('change', updateHotels);
+                priceRange.addEventListener('change', updateHotels);
+                starRating.addEventListener('change', updateHotels);
+            }
+            
+            // Display hotels
+            updateHotels();
+        });
+    </script>
+</body>
+</html>

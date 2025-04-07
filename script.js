@@ -54,17 +54,36 @@ window.addEventListener('click', (e) => {
     }
 });
 
-// Form Submissions
-searchForm.addEventListener('submit', (e) => {
+// Search form submission
+document.getElementById('searchForm').addEventListener('submit', function(e) {
     e.preventDefault();
+    
+    // Get form values
     const destination = document.getElementById('destination').value;
     const checkin = document.getElementById('checkin').value;
     const checkout = document.getElementById('checkout').value;
     const rooms = document.getElementById('rooms').value;
-    const guests = document.getElementById('guests').value;
-    
-    alert(`Searching for hotels in ${destination} from ${checkin} to ${checkout} for ${guests} guests in ${rooms} rooms.`);
-    // In a real application, you would redirect to search results or make an API call
+    const adults = document.getElementById('adults').value;
+    const children = document.getElementById('children').value || 0;
+
+    // Validate dates
+    if (new Date(checkout) <= new Date(checkin)) {
+        alert("Check-out date must be after check-in date");
+        return;
+    }
+
+    // Create URL with search parameters
+    const params = new URLSearchParams({
+        destination: destination,
+        checkin: checkin,
+        checkout: checkout,
+        rooms: rooms,
+        adults: adults,
+        children: children
+    });
+
+    // Redirect to hotel listings page with search parameters
+    window.location.href = `search-hotels.html?${params.toString()}`;
 });
 
 loginForm.addEventListener('submit', (e) => {
@@ -232,38 +251,6 @@ document.addEventListener('DOMContentLoaded', function() {
         cardWidth = cards[0].offsetWidth + 32;
         goToSlide(currentIndex);
     });
-});
-
-// Search form submission
-document.getElementById('searchForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form values
-    const destination = document.getElementById('destination').value;
-    const checkin = document.getElementById('checkin').value;
-    const checkout = document.getElementById('checkout').value;
-    const rooms = document.getElementById('rooms').value;
-    const adults = document.getElementById('adults').value;
-    const children = document.getElementById('children').value || 0;
-
-    // Validate dates
-    if (new Date(checkout) <= new Date(checkin)) {
-        alert("Check-out date must be after check-in date");
-        return;
-    }
-
-    // Create URL with search parameters
-    const params = new URLSearchParams({
-        destination: destination,
-        checkin: checkin,
-        checkout: checkout,
-        rooms: rooms,
-        adults: adults,
-        children: children
-    });
-
-    // Redirect to hotel listings page
-    window.location.href = `hotel-details.html?${params.toString()}`;
 });
 
 // Set default dates (today and tomorrow)

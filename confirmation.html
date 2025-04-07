@@ -7,23 +7,66 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header with Navigation -->
-    <header>
-        <div class="container header-container">
-            <div class="logo">Cozy Haven <span>Stay</span></div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#recommendations">Top Hotels</a></li>
-                    <li><a href="coupons.html">Coupons & Discounts</a></li>
-                    <li><a href="index.html#about">About us</a></li>
-                    <li><a href="index.html#help">Help</a></li>
-                </ul>
-            </nav>
-            
-        </div>
-    </header>
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-color: #4CAF50;
+            --primary-dark: #3e8e41;
+            --secondary-color: #2196F3;
+            --dark-color: #333;
+            --light-color: #f4f4f4;
+            --danger-color: #f44336;
+            --success-color: #4CAF50;
+            --warning-color: #ff9800;
+            --info-color: #2196F3;
+            --border-color: #ddd;
+            --shadow: 0 2px 5px rgba(0,0,0,0.1);
+            --radius: 8px;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Confirmation Container */
+        .confirmation-container {
+            padding: 40px 0;
+        }
+
+        .confirmation-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Progress Steps */
+        .confirmation-progress {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center
+        }
+    </style>
+    
     <!-- Confirmation Main Content -->
     <main class="confirmation-container">
         <div class="container">
@@ -303,8 +346,6 @@
             </form>
         </div>
     </div>
-
-    <script src="script.js"></script>
     <script src="confirmation.js"></script>
 </body>
 </html>
